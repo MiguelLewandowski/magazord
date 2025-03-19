@@ -1,19 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchGitHubUser } from "@/services/github";
+import { fetchGithubUser } from "@/services/githubUser";
+import { fetchGithubRepos } from "@/services/githubRepos";
 import Image from "next/image";
 
 export default function RepositoriesPage() {
   const [user, setUser] = useState<any>(null);
+  const [repos, setRepos] = useState<any>(null);
 
   useEffect(() => {
-    fetchGitHubUser("RaulLize").then(setUser);
-    console.log(fetchGitHubUser("RaulLize"))
+    fetchGithubUser("RaulLize").then(setUser);
+    console.log(fetchGithubUser("RaulLize"))
+    fetchGithubRepos("RaulLize").then(setRepos);
+    console.log(fetchGithubRepos("RaulLize"))
   }, []);
 
   return (
-    <div>
+    <div className="mt-5 flex gap-40">
       {user ? (
         <div className="cardUser">
           <Image src={user.avatar_url} className="rounded-full" alt={user.login} width={150} height={150} />
@@ -27,6 +31,24 @@ export default function RepositoriesPage() {
       ) : (
         <p>Carregando...</p>
       )}
+
+      <div className="mainContent flex flex-col gap-5">
+          <div className="blockTabs flex ">
+            <div className="tab">Repositories</div>
+            <div className="tab">Starred</div>
+          </div>
+
+          <div className="features">
+            <input className="inputSearch"></input>
+            <select name="" id="" className="filters">Type</select>
+            <select name="" id="" className="filters">Language</select>
+          </div>
+
+          <div className="boxRepositories">
+
+
+          </div>
+      </div>
     </div>
   );
 }
