@@ -1,4 +1,4 @@
-export async function fetchGitHubUser(username: string) {
+export async function fetchGithubUser(username: string) {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`);
     
