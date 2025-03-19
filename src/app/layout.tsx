@@ -10,9 +10,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header/>
-        <main className="container mx-auto px-4"></main>
-        {children}
+        <Header />
+        <main className="container mx-auto px-4">
+          {children}
+        </main>
       </body>
     </html>
   );
