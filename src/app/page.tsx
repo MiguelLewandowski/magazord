@@ -1,20 +1,18 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { fetchGithubUser } from "@/services/githubUser";
 import { fetchGithubRepos } from "@/services/githubRepos";
+import { fetchGitHubStarred } from "@/services/githubStarred";
+
 import Image from "next/image";
+import RepositoriesList from "@/components/RepositoriesList";
 
-export default function RepositoriesPage() {
-  const [user, setUser] = useState<any>(null);
-  const [repos, setRepos] = useState<any>(null);
+export default async function RepositoriesPage() {
+  const username = "MiguelLewandowski";
 
-  useEffect(() => {
-    fetchGithubUser("RaulLize").then(setUser);
-    console.log(fetchGithubUser("RaulLize"))
-    fetchGithubRepos("RaulLize").then(setRepos);
-    console.log(fetchGithubRepos("RaulLize"))
-  }, []);
+  const user = await fetchGithubUser(username);
+  const repos = await fetchGithubRepos(username);
+  console.log(await fetchGithubRepos(username))
+  const starred = await fetchGitHubStarred(username);
 
   return (
     <div className="mt-5 flex gap-40">
@@ -45,8 +43,8 @@ export default function RepositoriesPage() {
           </div>
 
           <div className="boxRepositories">
-
-
+            <RepositoriesList repos={repos}/>
+            <RepositoriesList repos={starred} isStarred={true} />
           </div>
       </div>
     </div>
