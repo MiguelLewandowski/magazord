@@ -1,0 +1,15 @@
+.activeContent{
+  display: flex;
+}
+
+.content{
+  display: none;
+}
+
+.activeTabs{
+  background-color: black;
+}
+
+.tabs{
+  background-color: aqua;
+}

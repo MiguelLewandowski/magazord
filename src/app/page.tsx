@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
 import { fetchGithubUser } from "@/services/githubUser";
 import { fetchGithubRepos } from "@/services/githubRepos";
 import { fetchGitHubStarred } from "@/services/githubStarred";
 
 import Image from "next/image";
 import RepositoriesList from "@/components/RepositoriesList";
+import Tabs from "@/components/Tabs";
 
 export default async function RepositoriesPage() {
-  const username = "MiguelLewandowski";
+
+
+  const username = "RaulLize";
 
   const user = await fetchGithubUser(username);
   const repos = await fetchGithubRepos(username);
@@ -31,21 +33,18 @@ export default async function RepositoriesPage() {
       )}
 
       <div className="mainContent flex flex-col gap-5">
-          <div className="blockTabs flex ">
-            <div className="tab">Repositories</div>
-            <div className="tab">Starred</div>
-          </div>
+        <Tabs />
 
-          <div className="features">
-            <input className="inputSearch"></input>
-            <select name="" id="" className="filters">Type</select>
-            <select name="" id="" className="filters">Language</select>
-          </div>
+        <div className="features">
+          <input className="inputSearch"></input>
+          <select name="" id="" className="filters">Type</select>
+          <select name="" id="" className="filters">Language</select>
+        </div>
 
-          <div className="boxRepositories">
-            <RepositoriesList repos={repos}/>
-            <RepositoriesList repos={starred} isStarred={true} />
-          </div>
+        <div className="boxRepositories">
+          <RepositoriesList repos={repos} />
+          <RepositoriesList repos={starred} isStarred={true} />
+        </div>
       </div>
     </div>
   );
