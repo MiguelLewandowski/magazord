@@ -10,33 +10,50 @@ interface Repo {
   forks_count: number;
   language: string | null;
 }
-
 interface RepositoryListProps {
   repos: Repo[];
   isStarred?: boolean;
 }
 
-interface RepositoryListProps {
-  repos: Repo[];
-}
-
-const RepositoryList: React.FC<RepositoryListProps> = ({repos, isStarred = false }) => {
+const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = false }) => {
   return (
-    <div className="">
+    <div className="space-y-6">
       {repos.length > 0 ? (
-        <ul className="">
+        <ul className="space-y-4">
           {repos.map((repo) => (
-            <li key={repo.id} className="">
-              <a href={repo.html_url} target="_blank" className="">
-                {repo.full_name} 
+            <li key={repo.id} className="p-4">
+              <a
+                href={repo.html_url}
+                target="_blank"
+                className="text-lg"
+              >
+                {repo.full_name.split("/")[0]}{" / "}
+                <span className="text-blue-500 font-semibold">{repo.full_name.split("/")[1]}</span>
               </a>
-              <p className="">{repo.description || "Sem descrição"}</p>
-              {isStarred ? `${repo.language || "Não especificado"} | ${repo.forks_count}`  : `⭐ ${repo.stargazers_count} | 🔁 ${repo.forks_count}`}
+
+              <p className="text-gray-600 text-sm mt-1">
+                {repo.description || "Sem descrição"}
+              </p>
+
+              <div className="flex items-center space-x-4 text-gray-700 mt-2">
+                {isStarred ? (
+                  <p className="text-sm">{repo.language || "Não especificado"}</p>
+                ) : (
+                  <>
+                    <p className="flex items-center space-x-1">
+                      ⭐ <span className="font-semibold">{repo.stargazers_count}</span>
+                    </p>
+                    <p className="flex items-center space-x-1">
+                      🔁 <span className="font-semibold">{repo.forks_count}</span>
+                    </p>
+                  </>
+                )}
+              </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="">Nenhum repositório encontrado.</p>
+        <p className="text-gray-500">Nenhum repositório encontrado.</p>
       )}
     </div>
   );
