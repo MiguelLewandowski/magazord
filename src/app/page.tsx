@@ -8,6 +8,7 @@ import Image from "next/image";
 import RepositoriesList from "@/components/RepositoriesList";
 import Tabs from "@/components/Tabs";
 import { useEffect, useState } from "react";
+import Filters from "@/components/Filters";
 
 export default function RepositoriesPage() {
   const username = "RaulLize";
@@ -55,12 +56,7 @@ export default function RepositoriesPage() {
       <Tabs repoCount={repos.length} starredCount={starred.length} />
 
 
-        <div className="features">
-          <input className="inputSearch"></input>
-          <select name="" id="" className="filters">Type</select>
-          <select name="" id="" className="filters">Language</select>
-        </div>
-
+        <Filters />
         <div className="boxRepositories">
           {activeTab === 1 ? (
             <RepositoriesList repos={repos} />
