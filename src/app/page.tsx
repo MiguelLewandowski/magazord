@@ -3,21 +3,19 @@
 import { fetchGithubUser } from "@/services/githubUser";
 import { fetchGithubRepos } from "@/services/githubRepos";
 import { fetchGitHubStarred } from "@/services/githubStarred";
-
+import { useTabStore } from "@/store/useTabStore";
 import Image from "next/image";
 import RepositoriesList from "@/components/RepositoriesList";
 import Tabs from "@/components/Tabs";
 import { useEffect, useState } from "react";
 
 export default function RepositoriesPage() {
-
-
   const username = "RaulLize";
-
   const [user, setUser] = useState<any>(null);
   const [repos, setRepos] = useState<any[]>([]);
   const [starred, setStarred] = useState<any[]>([]);
-  const [activeTab, setActiveTab] = useState(1); 
+
+  const { activeTab } = useTabStore();
 
   useEffect(() => {
     const loadData = async () => {
@@ -34,7 +32,7 @@ export default function RepositoriesPage() {
       }
     };
 
-    loadData(); 
+    loadData();
   }, []);
 
   return (
@@ -54,7 +52,7 @@ export default function RepositoriesPage() {
       )}
 
       <div className="mainContent flex flex-col gap-5">
-        <Tabs onTabChange={setActiveTab}/>
+        <Tabs />
 
         <div className="features">
           <input className="inputSearch"></input>
@@ -63,8 +61,11 @@ export default function RepositoriesPage() {
         </div>
 
         <div className="boxRepositories">
-        {activeTab === 1 && <RepositoriesList repos={repos} />}
-        {activeTab === 2 && <RepositoriesList repos={starred} isStarred={true} />}
+          {activeTab === 1 ? (
+            <RepositoriesList repos={repos} />
+          ) : (
+            <RepositoriesList repos={starred} isStarred={true} />
+          )}
         </div>
       </div>
     </div>
