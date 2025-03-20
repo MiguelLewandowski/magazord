@@ -1,13 +1,30 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import useRepoStore from "@/store/useRepoStore";
 
 const Filters: React.FC = () => {
+  const { searchInput, setFilters, submitSearch } = useRepoStore();
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ searchInput: e.target.value });
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitSearch();
+    }
+  };
+
   return (
     <div className="flex items-center justify-between gap-4 w-full max-w-3xl my-3">
       <div className="relative flex-grow">
         <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         <input
           type="text"
+          value={searchInput}
+          onChange={handleSearch}
+          onKeyUp={handleKeyPress}
           placeholder="Search Here"
           className="w-full pl-10 pr-4 py-2 border-b border-gray-200 focus:outline-none focus:border-gray-600"
         />

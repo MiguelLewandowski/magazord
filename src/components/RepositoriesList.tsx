@@ -1,3 +1,4 @@
+import useRepoStore from "@/store/useRepoStore";
 import React from "react";
 
 interface Repo {
@@ -10,17 +11,35 @@ interface Repo {
   forks_count: number;
   language: string | null;
 }
+
 interface RepositoryListProps {
   repos: Repo[];
   isStarred?: boolean;
 }
 
 const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = false }) => {
+  const { searchRepo, activeTab } = useRepoStore();
+
+  if ((activeTab === "starred" && !isStarred) || (activeTab === "repositories" && isStarred)) {
+    return null;
+  }
+
+  let reposToShow = repos;
+  if (searchRepo) {
+    reposToShow = repos.filter((repo) => {
+      const searchLower = searchRepo.toLowerCase();
+      const nameLower = repo.name.toLowerCase();
+      const descriptionLower = repo.description?.toLowerCase() || "";
+
+      return nameLower.includes(searchLower) || descriptionLower.includes(searchLower);
+    });
+  }
+
   return (
     <div className="space-y-6">
-      {repos.length > 0 ? (
+      {reposToShow.length > 0 ? (
         <ul className="space-y-4">
-          {repos.map((repo) => (
+          {reposToShow.map((repo) => (
             <li key={repo.id} className="p-4 ">
               <a
                 href={repo.html_url}
@@ -53,7 +72,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = fals
           ))}
         </ul>
       ) : (
-        <p className="text-gray-500">Nenhum repositório encontrado.</p>
+        <p className="text-center text-gray-500">Nenhum repositório encontrado</p>
       )}
     </div>
   );
