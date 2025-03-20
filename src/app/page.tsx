@@ -36,7 +36,7 @@ export default function RepositoriesPage() {
   }, []);
 
   return (
-    <div className="mt-5 flex gap-40">
+    <div className="mt-10 flex gap-40">
       {user ? (
         <div className="cardUser">
           <Image src={user.avatar_url} className="rounded-full" alt={user.login} width={150} height={150} />
@@ -52,7 +52,8 @@ export default function RepositoriesPage() {
       )}
 
       <div className="mainContent flex flex-col gap-5">
-        <Tabs />
+      <Tabs repoCount={repos.length} starredCount={starred.length} />
+
 
         <div className="features">
           <input className="inputSearch"></input>

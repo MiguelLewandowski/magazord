@@ -21,7 +21,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = fals
       {repos.length > 0 ? (
         <ul className="space-y-4">
           {repos.map((repo) => (
-            <li key={repo.id} className="p-4">
+            <li key={repo.id} className="p-4 ">
               <a
                 href={repo.html_url}
                 target="_blank"
