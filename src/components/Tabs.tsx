@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import styles from './tabs.module.css';
 
 interface TabsProps {
-
+  onTabChange: (tabIndex: number) => void;
 }
 
-const Tabs: React.FC<TabsProps> = () => {
+const Tabs: React.FC<TabsProps> = ({ onTabChange }) => {
   const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index: number) => {
-    setToggleState(index)
+    setToggleState(index);
+    onTabChange(index);
   }
   return (
     <div className="blockTabs flex ">
