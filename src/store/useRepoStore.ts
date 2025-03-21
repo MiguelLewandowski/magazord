@@ -10,6 +10,8 @@ interface FiltersState {
   submitSearch: () => void;
   setActiveTab: (tab: "repositories" | "starred") => void;
   clearSearch: () => void;
+  setType: (type: string) => void;
+  setLanguage: (language: string) => void;
 }
 
 const useRepoStore = create<FiltersState>((set) => ({
@@ -18,12 +20,14 @@ const useRepoStore = create<FiltersState>((set) => ({
   activeTab: "repositories",
   type: "all",
   language: "all",
+
   setFilters: (filters) => set((state) => ({ ...state, ...filters })),
   submitSearch: () =>
     set((state) => ({
       ...state,
       searchRepo: state.searchInput,
     })),
+
   setActiveTab: (tab) =>
     set((state) => ({
       ...state,
@@ -31,11 +35,24 @@ const useRepoStore = create<FiltersState>((set) => ({
       searchRepo: "",
       searchInput: "",
     })),
+
   clearSearch: () =>
     set((state) => ({
       ...state,
       searchRepo: "",
       searchInput: "",
+    })),
+    
+  setType: (type) => 
+    set((state) => ({
+      ...state,
+      type,
+    })),
+    
+  setLanguage: (language) => 
+    set((state) => ({
+      ...state,
+      language,
     })),
 }));
 
