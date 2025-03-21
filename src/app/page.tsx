@@ -1,42 +1,37 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { fetchGithubUser } from "@/services/githubUser";
-import { fetchGithubRepos } from "@/services/githubRepos";
-import { fetchGitHubStarred } from "@/services/githubStarred";
 import useRepoStore from "@/store/useRepoStore";
 import RepositoriesList from "@/components/RepositoriesList";
 import Tabs from "@/components/Tabs";
 import Filters from "@/components/Filters";
+import { useGithubUser, useGithubRepos, useGithubStarred } from "@/hooks/useGithubData";
 
 export default function RepositoriesPage() {
-  //Coloque aqui o usuário que deseja ver os repositórios
+  // Coloque aqui o usuário do github que deseja ver os dados
   const username = "yyx990803";
-
-  const [user, setUser] = useState<any>(null);
-  const [repos, setRepos] = useState<any[]>([]);
-  const [starred, setStarred] = useState<any[]>([]);
+  
   const { activeTab } = useRepoStore();
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const userData = await fetchGithubUser(username);
-        const userRepos = await fetchGithubRepos(username);
-        const userStarred = await fetchGitHubStarred(username);
+  const userQuery = useGithubUser(username);
+  const reposQuery = useGithubRepos(username);
+  const starredQuery = useGithubStarred(username);
 
-        setUser(userData);
-        setRepos(userRepos);
-        setStarred(userStarred);
-      } catch (error) {
-        console.error("Erro ao carregar os dados", error);
-      }
-    };
-
-    loadData();
-  }, []);
+  const user = userQuery.data;
+  const repos = reposQuery.data || [];
+  const starred = starredQuery.data || [];
 
   const allRepos = [...repos, ...starred];
+
+  const isLoading = userQuery.isLoading || reposQuery.isLoading || starredQuery.isLoading;
+
+  if (isLoading) {
+    return <p className="text-center mt-10">Carregando dados do GitHub...</p>;
+  }
+
+  if (!user) {
+    return <p className="text-center mt-10">Erro ao carregar dados do usuário.</p>;
+  }
 
   return (
     <div className="mt-10 flex gap-40">

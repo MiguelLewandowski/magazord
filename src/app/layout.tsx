@@ -1,6 +1,6 @@
 import "./globals.css";
 import Header from "@/components/header/Header";
-
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -10,10 +10,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="container mx-auto px-4">
-          {children}
-        </main>
+        <Providers>
+          <Header />
+          <main className="container mx-auto px-4">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
