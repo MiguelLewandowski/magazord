@@ -34,6 +34,8 @@ export default function RepositoriesPage() {
     loadData();
   }, []);
 
+  const allRepos = [...repos, ...starred];
+
   return (
     <div className="mt-10 flex gap-40">
       {user ? (
@@ -52,7 +54,7 @@ export default function RepositoriesPage() {
 
       <div className="mainContent flex flex-col gap-5">
         <Tabs repoCount={repos.length} starredCount={starred.length} />
-        <Filters />
+        <Filters repos={allRepos} />
         <div className="boxRepositories">
           <RepositoriesList 
           repos={activeTab === "repositories" ? repos : starred} 
