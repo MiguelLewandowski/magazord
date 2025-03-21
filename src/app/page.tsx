@@ -10,7 +10,9 @@ import Tabs from "@/components/Tabs";
 import Filters from "@/components/Filters";
 
 export default function RepositoriesPage() {
-  const username = "MiguelLewandowski";
+  //Coloque aqui o usuário que deseja ver os repositórios
+  const username = "yyx990803";
+
   const [user, setUser] = useState<any>(null);
   const [repos, setRepos] = useState<any[]>([]);
   const [starred, setStarred] = useState<any[]>([]);
