@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import useRepoStore from "@/store/useRepoStore";
 
-const Filters: React.FC = () => {
-  const { searchInput, setFilters, submitSearch } = useRepoStore();
+interface FiltersProps {
+  repos: any[];
+}
+
+const Filters: React.FC<FiltersProps> = ({ repos }) => {
+  const { searchInput, type, language, setFilters, submitSearch, setType, setLanguage } = useRepoStore();
+  const [languages, setLanguages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (repos && repos.length > 0) {
+      const foundLanguages: string[] = [];
+      
+      repos.forEach((repo) => {
+        if (repo.language && !foundLanguages.includes(repo.language)) {
+          foundLanguages.push(repo.language);
+        }
+      });
+      
+      setLanguages(foundLanguages);
+    }
+  }, [repos]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ searchInput: e.target.value });
@@ -14,6 +33,14 @@ const Filters: React.FC = () => {
       e.preventDefault();
       submitSearch();
     }
+  };
+
+  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setType(e.target.value);
+  };
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value);
   };
 
   return (
@@ -31,8 +58,15 @@ const Filters: React.FC = () => {
       </div>
 
       <div className="relative">
-        <select className="appearance-none pl-8 pr-4 py-2 bg-blue-600 text-white rounded-full focus:outline-none cursor-pointer w-full">
-          <option>Type</option>
+        <select 
+          value={type}
+          onChange={handleTypeChange}
+          className="appearance-none pl-8 pr-4 py-2 bg-blue-600 text-white rounded-full focus:outline-none cursor-pointer w-full"
+        >
+          <option value="all">All Types</option>
+          <option value="source">Source</option>
+          <option value="fork">Fork</option>
+          <option value="archived">Archived</option>
         </select>
         <svg
           className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white pointer-events-none"
@@ -48,8 +82,17 @@ const Filters: React.FC = () => {
       </div>
 
       <div className="relative">
-        <select className="appearance-none pl-8 pr-4 py-2 bg-blue-600 text-white rounded-full focus:outline-none cursor-pointer w-full">
-          <option>Language</option>
+        <select 
+          value={language}
+          onChange={handleLanguageChange}
+          className="appearance-none pl-8 pr-4 py-2 bg-blue-600 text-white rounded-full focus:outline-none cursor-pointer w-full"
+        >
+          <option value="all">All Languages</option>
+          {languages.map((language) => (
+            <option key={language} value={language.toLowerCase()}>
+              {language}
+            </option>
+          ))}
         </select>
         <svg
           className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white pointer-events-none"
