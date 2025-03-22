@@ -1,5 +1,6 @@
 import useRepoStore from "@/store/useRepoStore";
 import React from "react";
+import Link from "next/link";
 
 interface Repo {
   id: number;
@@ -58,14 +59,13 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = fals
         <ul className="space-y-4">
           {reposToShow.map((repo) => (
             <li key={repo.id} className="p-4 ">
-              <a
-                href={repo.html_url}
-                target="_blank"
+              <Link
+                href={`/repositories/${repo.full_name.split("/")[1]}`}
                 className="text-lg"
               >
                 {repo.full_name.split("/")[0]}{" / "}
                 <span className="text-blue-500 font-semibold">{repo.full_name.split("/")[1]}</span>
-              </a>
+              </Link>
               <p className="text-gray-600 mt-1">{repo.description}</p>
               <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
                 {<span>{repo.language}</span>}
