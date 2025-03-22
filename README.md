@@ -1,5 +1,3 @@
-# GitHub Repos Viewer
-
 Aplicação web para visualizar e filtrar repositórios de usuários do GitHub, desenvolvida como parte do teste técnico da Magazord.
 
 ## 📋 Sobre o Projeto
@@ -37,7 +35,7 @@ Este projeto consiste em uma aplicação web que consome a API do GitHub para ex
    yarn install
    ```
 
-3. Coloque o username do github que deseja buscar os dados no arquivo `src/app/page.tsx` na variavel 'username'.
+3. Coloque o username do usuário do github que deseja buscar os dados no arquivo `src/app/page.tsx` na variavel 'username'.
 
 4. Execute o projeto em modo de desenvolvimento:
    ```
@@ -54,11 +52,7 @@ Este projeto consiste em uma aplicação web que consome a API do GitHub para ex
 ### Estrutura de Pastas
 - **Feature-based**: Organizei o código separando por recurso/funcionalidade, facilitando a manutenção e escalabilidade.
 
-### Paginação da API do GitHub
-- Implementei uma solução para lidar com a limitação da API do GitHub que retorna no máximo 100 itens por página, realizando múltiplas requisições quando necessário.
-
 ## 🔍 Funcionalidades
-
 - Visualização de dados do perfil do usuário (avatar, nome, bio, número de repositórios)
 - Alternância entre visualização de repositórios e repositórios favoritados (starred)
 - Filtragem de repositórios por:
@@ -70,7 +64,7 @@ Este projeto consiste em uma aplicação web que consome a API do GitHub para ex
 ## 📝 Decisões de Implementação
 
 ### API do GitHub
-Ao desenvolver este projeto, enfrentei o desafio da limitação da API do GitHub que retorna no máximo 100 repositórios por página. Para contornar isso, implementei uma solução que faz múltiplas requisições e concatena os resultados até obter todos os repositórios do usuário baseado na doc https://docs.github.com/pt/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories.
+Ao desenvolver este projeto, enfrentei o desafio da limitação da API do GitHub que retorna no máximo 100 repositórios por página. Para contornar isso, vi na doc https://docs.github.com/pt/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories que o padrão eram 30 repositórios por página e fiz com que em githubRepos.ts fizesse mais de uma requisição caso tivesse mais repositórios, e a cada requisição pegasse 100 repos por página que é o máximo.
 
 ### Componentes Reutilizáveis
 Desenvolvi componentes isolados e reutilizáveis para facilitar a manutenção e possibilitar futuras expansões da aplicação, como a inclusão de novas visualizações ou filtros.
