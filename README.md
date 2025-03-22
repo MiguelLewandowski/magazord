@@ -2,8 +2,6 @@
 
 Aplicação web para visualizar e filtrar repositórios de usuários do GitHub, desenvolvida como parte do teste técnico da Magazord.
 
-![GitHub Repos Viewer Screenshot](https://via.placeholder.com/800x400?text=GitHub+Repos+Viewer)
-
 ## 📋 Sobre o Projeto
 
 Este projeto consiste em uma aplicação web que consome a API do GitHub para exibir informações de um usuário específico, incluindo seus repositórios e repositórios favoritados (starred). A aplicação permite alternar entre visualizações, filtrar por tipo e linguagem utilizada e pesquisar repositórios.
