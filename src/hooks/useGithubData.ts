@@ -3,7 +3,6 @@ import { fetchGithubUser } from "@/services/githubUser";
 import { fetchGithubRepos } from "@/services/githubRepos";
 import { fetchGitHubStarred } from "@/services/githubStarred";
 
-// Busca dados do usuário
 export function useGithubUser(username: string) {
   const result = useQuery({
     queryKey: ["githubUser", username],
@@ -15,7 +14,6 @@ export function useGithubUser(username: string) {
   return result;
 }
 
-// Busca repositórios
 export function useGithubRepos(username: string) {
     const result = useQuery({
       queryKey: ["githubRepos", username],
@@ -28,7 +26,6 @@ export function useGithubRepos(username: string) {
     return result;
   }
 
-// Busca repositórios favoritos
 export function useGithubStarred(username: string) {
     const result = useQuery({
       queryKey: ["githubStarred", username],

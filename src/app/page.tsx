@@ -1,5 +1,4 @@
 'use client'
-import { useState } from "react";
 import Image from "next/image";
 import useRepoStore from "@/store/useRepoStore";
 import RepositoriesList from "@/components/RepositoriesList";
@@ -9,7 +8,7 @@ import { useGithubUser, useGithubRepos, useGithubStarred } from "@/hooks/useGith
 
 export default function RepositoriesPage() {
   // Coloque aqui o usuário do github que deseja ver os dados
-  const username = "yyx990803";
+  const username = "MiguelLewandowski";
   
   const { activeTab } = useRepoStore();
 
