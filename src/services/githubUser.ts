@@ -1,14 +1,35 @@
 export async function fetchGithubUser(username: string) {
   try {
-    const response = await fetch(`https://api.github.com/users/${username}`);
+    const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''; 
+    
+    const options: RequestInit = {};
+    if (GITHUB_TOKEN) {
+      options.headers = {
+        Authorization: `token ${GITHUB_TOKEN}`
+      };
+    }
+    
+    const response = await fetch(
+      `https://api.github.com/users/${username}`,
+      options
+    );
     
     if (!response.ok) {
-      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      console.error('GitHub API Error:', response.status, errorData);
+      
+      if (response.status === 403) {
+        throw new Error("Limite de requisições da API do GitHub excedido. Adicione um token de acesso caso não tenha configurado ainda!");
+      } else if (response.status === 404) {
+        throw new Error(`Usuário '${username}' não encontrado no GitHub.`);
+      } else {
+        throw new Error(`Erro ao buscar usuário: ${response.status} ${response.statusText}`);
+      }
     }
 
     return await response.json();
   } catch (error) {
     console.error("Erro ao buscar usuário do GitHub:", error);
-    return null;
+    throw error;
   }
 }
