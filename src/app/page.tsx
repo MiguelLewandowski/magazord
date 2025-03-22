@@ -8,7 +8,7 @@ import { useGithubUser, useGithubRepos, useGithubStarred } from "@/hooks/useGith
 
 export default function RepositoriesPage() {
   // Coloque aqui o usuário do github que deseja ver os dados
-  const username = "MiguelLewandowski";
+  const username = "torvalds";
   
   const { activeTab } = useRepoStore();
 

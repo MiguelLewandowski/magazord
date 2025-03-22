@@ -60,7 +60,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = fals
           {reposToShow.map((repo) => (
             <li key={repo.id} className="p-4 ">
               <Link
-                href={`/repositories/${repo.full_name.split("/")[1]}`}
+                href={`/repositories/${encodeURIComponent(repo.full_name)}`}
                 className="text-lg"
               >
                 {repo.full_name.split("/")[0]}{" / "}
