@@ -1,6 +1,6 @@
 export async function fetchGithubRepos(username: string) {
 try {
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''; 
+    const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
     
     let allRepos: any[] = [];
     let page = 1;

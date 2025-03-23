@@ -1,6 +1,6 @@
 export async function fetchGitHubStarred(username: string) {
 try {
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''; 
+  const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
     
     const options: RequestInit = {};
     if (GITHUB_TOKEN) {
@@ -20,9 +20,6 @@ try {
       );
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('GitHub API Error:', response.status, errorData);
-        
         if (response.status === 403) {
           throw new Error("Limite de requisições da API do GitHub excedido. Adicione um token de acesso caso não tenha configurado ainda!");
         } else if (response.status === 404) {
