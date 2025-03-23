@@ -1,0 +1,49 @@
+.selectButton {
+  position: relative;
+  appearance: none;
+  padding: 0.375rem 0.5rem 0.375rem 2rem;
+  border-radius: 25px;
+  background-color: #0969da;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.typeButton {
+  width: 90px;
+}
+
+.languageButton {
+  width: 120px;
+}
+
+.selectContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.selectArrow {
+  color: white;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  font-size: 0.75rem;
+  z-index: 1;
+}
+
+.selectContainer:focus-within .selectArrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.selectContainer:not(:focus-within) .selectArrow {
+  transform: translateY(-50%) rotate(0deg);
+}

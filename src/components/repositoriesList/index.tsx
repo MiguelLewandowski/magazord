@@ -1,6 +1,7 @@
 import useRepoStore from "@/store/useRepoStore";
 import React from "react";
 import Link from "next/link";
+import { FaStar, FaCodeBranch } from "react-icons/fa";
 
 interface Repo {
   id: number;
@@ -23,7 +24,7 @@ interface RepositoryListProps {
 const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = false }) => {
   const { searchRepo, activeTab, type, language } = useRepoStore();
 
-// Se estamos na tab starred, só mostra os repos favoritados se isStarred for verdadeiro || se estamos na repositories, só mostra os repos não favoritados se isStarred for falso
+  // Se estamos na tab starred, só mostra os repos favoritados se isStarred for verdadeiro || se estamos na repositories, só mostra os repos não favoritados se isStarred for falso
   if ((activeTab === "starred" && !isStarred) || (activeTab === "repositories" && isStarred)) {
     return null;
   }
@@ -54,29 +55,41 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repos, isStarred = fals
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 sm:space-y-4 md:space-y-5">
       {reposToShow.length > 0 ? (
-        <ul className="space-y-4">
+        <ul className="space-y-3 sm:space-y-4">
           {reposToShow.map((repo) => (
-            <li key={repo.id} className="p-4 ">
+            <li key={repo.id} className="p-3 sm:p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors">
               <Link
                 href={`/repositories/${encodeURIComponent(repo.full_name)}`}
-                className="text-lg"
+                className="text-sm sm:text-base md:text-xl block break-words hover:text-blue-600 transition-colors"
               >
-                {repo.full_name.split("/")[0]}{" / "}
+                <span className="text-black">{repo.full_name.split("/")[0]}</span>
+                <span className="text-black mx-1">/</span>
                 <span className="text-blue-500 font-semibold">{repo.full_name.split("/")[1]}</span>
               </Link>
-              <p className="text-gray-600 mt-1">{repo.description}</p>
-              <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                {<span>{repo.language}</span>}
-                <span>⭐ {repo.stargazers_count}</span>
-                <span>🍴 {repo.forks_count}</span>
+              <p className="text-gray-400 mt-2 text-xs sm:text-sm md:text-lg">{repo.description || "No description available"}</p>
+              <div className="flex flex-wrap items-center gap-3 mt-3 text-xs sm:text-sm text-black">
+                {repo.language && isStarred && (
+                  <span className="flex items-center">
+                    <span className="w-3 h-3 rounded-full bg-blue-600 mr-1.5"></span>
+                    {repo.language}
+                  </span>
+                )}
+                <span className="flex items-center">
+                  <FaStar className="mr-1.5 text-black w-4 h-4" />
+                  {repo.stargazers_count}
+                </span>
+                <span className="flex items-center">
+                  <FaCodeBranch className="mr-1.5 text-black w-4 h-4" />
+                  {repo.forks_count}
+                </span>
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="text-center text-gray-500">Nenhum repositório encontrado.</p>
+        <p className="text-center text-black py-4 sm:py-6 text-sm sm:text-base">Nenhum repositório encontrado.</p>
       )}
     </div>
   );
