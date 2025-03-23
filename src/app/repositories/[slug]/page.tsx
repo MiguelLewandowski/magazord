@@ -7,13 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
 
-type PageParams = {
-  params: {
-    slug: string;
-  };
-};
 
-export default async function Page({ params }: PageParams) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const decodedSlug = decodeURIComponent(slug);
 
