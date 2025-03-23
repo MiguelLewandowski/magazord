@@ -8,12 +8,13 @@ import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
 
 type Props = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const slug = params.slug;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
   const decodedSlug = decodeURIComponent(slug);
 
   const [username, repo] = decodedSlug.split("/");
