@@ -37,6 +37,8 @@ Este projeto consiste em uma aplicação web que consome a API do GitHub para ex
 
 3. Coloque o username do usuário do github que deseja buscar os dados no arquivo `src/app/page.tsx` na variavel 'username'.
 
+4. Crie um arquivo .env.local na raix do projeto, e configure um Token de acesso no github. Após isso coloque o seguinte código: GITHUB_TOKEN='seu token'
+
 4. Execute o projeto em modo de desenvolvimento:
    ```
    npm run dev
@@ -65,6 +67,8 @@ Este projeto consiste em uma aplicação web que consome a API do GitHub para ex
 
 ### API do GitHub
 Ao desenvolver este projeto, enfrentei o desafio da limitação da API do GitHub que retorna no máximo 100 repositórios por página. Para contornar isso, vi na doc https://docs.github.com/pt/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories que o padrão eram 30 repositórios por página e fiz com que em githubRepos.ts fizesse mais de uma requisição caso tivesse mais repositórios, e a cada requisição pegasse 100 repos por página que é o máximo.
+
+Outro desafio foi que ao desenvolver ser o uso do token, pois achei que não iria precisar, ocorreu um erro ao desenvolver depois de algum tempo. O que descobri foi que o github limita as requisições sem autenticação por hora, então adicionei o 3 passo para que o usuário possa usar um token e assim não ter problemas com requisições.
 
 ### Componentes Reutilizáveis
 Desenvolvi componentes isolados e reutilizáveis para facilitar a manutenção e possibilitar futuras expansões da aplicação, como a inclusão de novas visualizações ou filtros.
