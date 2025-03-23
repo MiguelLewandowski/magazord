@@ -7,13 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
 
-type PageParams = {
-  params: {
-    slug: string;
-  };
-};
+type Props = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
-export default async function Page({ params }: PageParams) {
+export default async function Page({ params, searchParams }: Props) {
   const slug = params.slug;
   const decodedSlug = decodeURIComponent(slug);
 
