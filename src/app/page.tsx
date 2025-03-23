@@ -1,20 +1,21 @@
 "use client";
 import Image from "next/image";
 import useRepoStore from "@/store/useRepoStore";
-import RepositoriesList from "@/components/RepositoriesList";
-import Tabs from "@/components/Tabs";
-import Filters from "@/components/Filters";
+import Tabs from "@/components/tabs";
+import Filters from "@/components/filters";
+import RepositoriesList from "@/components/repositoriesList";
 import {
   useGithubUser,
   useGithubRepos,
   useGithubStarred,
 } from "@/hooks/useGithubData";
-import Header from "@/components/header/Header";
+import Header from "@/components/header";
 import { GoLocation, GoChevronDown } from "react-icons/go";
+
 
 export default function RepositoriesPage() {
   // Coloque aqui o usuário do github que deseja ver os dados
-  const username = "torvalds";
+  const username = "ruanyf";
 
   const { activeTab } = useRepoStore();
 
@@ -46,7 +47,7 @@ export default function RepositoriesPage() {
       <div className="w-full">
         <Header />
       </div>
-      <div className="container mx-auto px-4 py-6 sm:py-8 md:py-10">
+      <div className="container mx-auto px-3 lg:px-35 py-6 sm:py-8 md:py-10">
         <div className="flex flex-col md:flex-row md:gap-6 lg:gap-10 xl:gap-16">
           {user ? (
             <>
@@ -56,8 +57,8 @@ export default function RepositoriesPage() {
                     src={user.avatar_url}
                     className="rounded-full mb-2"
                     alt={user.login}
-                    width={100}
-                    height={100}
+                    width={180}
+                    height={180}
                     sizes="(max-width: 768px) 100px, (max-width: 1024px) 120px, 150px"
                   />
                   <div className="mt-4 text-center mb-5">
@@ -101,7 +102,7 @@ export default function RepositoriesPage() {
             <p>Carregando...</p>
           )}
 
-          <div className="flex-1 flex flex-col gap-4 sm:gap-5">
+          <div className="flex-1 flex flex-col gap-4 sm:gap-7">
             <Tabs repoCount={repos.length} starredCount={starred.length} />
             <Filters repos={allRepos} />
             <div className="mt-2 sm:mt-4">
