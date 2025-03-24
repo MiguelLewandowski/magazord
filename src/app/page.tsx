@@ -15,7 +15,7 @@ import { GoLocation, GoChevronDown } from "react-icons/go";
 
 export default function RepositoriesPage() {
   // Coloque aqui o usuário do github que deseja ver os dados
-  const username = "ruanyf";
+  const username = "bradtraversy";
 
   const { activeTab } = useRepoStore();
 
