@@ -38,7 +38,8 @@ export async function fetchGithubRepoDetails(username: string, repo: string) {
 
 export async function fetchRepoIssues(username: string, repo: string, per_page = 0) {
   try {
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''; 
+
+    const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
     
     const options: RequestInit = {};
     if (GITHUB_TOKEN) {
