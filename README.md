@@ -1,6 +1,6 @@
 Aplicação web para visualizar e filtrar repositórios de usuários do GitHub, desenvolvida como parte do teste técnico da Magazord.
 
-Acesse a aplicação online: [Magazord GitHub Explorer](https://magazord-ou9c.vercel.app)
+Acesse a aplicação online: [Magazord GitHub Explorer](https://magazord-mu.vercel.app)
 
 ## 📋 Sobre o Projeto
 
@@ -68,13 +68,11 @@ Outro desafio foi que ao desenvolver ser o uso do token, pois achei que não iri
 
 ### Desafios com o Next.js 15
 
-Um dos principais desafios técnicos enfrentados neste projeto foi a compatibilidade com o Next.js 15, versão recente e com algumas mudanças significativas em relação às versões anteriores. Particularmente, foi necessário lidar com a tipagem dos parâmetros de página (`params` e `searchParams`) sofreu mudanças importantes no Next.js 15, onde agora são tratados como `Promise` e requerem await para serem acessados onde acabei demorando um tempo para estudar sobre o erro nas documentações.
+Um dos principais desafios técnicos enfrentados neste projeto foi lidar com a tipagem de params em pages, na pagina que mostra os detalhes do repositório, pois eu não tinha lidado com isso antes, e vendo documentações vi que os params tinham que ter uma estrutura certa e eram lidados como Promise, então eu tinha que colocar isso e utilizar o await, e esse foi um erro que eu só vi quando fui dar o deploy na vercel.
 
 ### Desafio com Zustand para Gerenciamento de Estado
 
-Outro desafio foi a implementação do Zustand para gerenciamento de estado, uma biblioteca que eu nunca havia utilizado antes.A abordagem mais minimalista do Zustand exigiu uma adaptação na forma de pensar o gerenciamento de estado mas acabou sendo muito interessante e tranquila de aprender.
-
-Com o Zustand, aprendi a criar stores com menos código, aproveitar a integração direta com hooks do React e implementar filtros de forma simples e eficiente sem a necessidade de estruturas complexas.
+Outro desafio foi a implementação do Zustand para gerenciamento de estado, uma biblioteca que eu nunca havia utilizado antes. A abordagem mais minimalista do Zustand exigiu uma adaptação na forma de pensar o gerenciamento de estado mas acabou sendo muito interessante e tranquila de aprender.
 
 #### Fontes de Documentação
 
